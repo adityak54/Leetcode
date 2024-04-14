@@ -10,17 +10,15 @@
  * };
  */
 class Solution {
-    bool chk = false;
 public:
     int sumOfLeftLeaves(TreeNode* root) {
-        if(!root->left && !root->right){
-            if(chk) return root->val;
-            return 0;
+        if(root==NULL) return 0;
+        int ans = 0;
+        if(root->left){
+            if(!root->left->left && !root->left->right) ans+=root->left->val;
+            else ans+=sumOfLeftLeaves(root->left);
         }
-        int left = 0, right = 0;
-        if(root->left) chk = true,left = sumOfLeftLeaves(root->left);
-        if(root->right) chk = false,right = sumOfLeftLeaves(root->right);
-        return left+right;
-        
+        ans+=sumOfLeftLeaves(root->right);
+        return ans;
     }
 };
