@@ -11,28 +11,25 @@
  */
 class Solution {
 public:
+    void dfs(TreeNode* node,int val,int level,int depth){
+        if(level==depth-1){
+            TreeNode* node1 = new TreeNode(val);
+            TreeNode* node2 = new TreeNode(val);
+            node1->left = node->left;
+            node2->right = node->right;
+            node->left = node1, node->right = node2;
+            return;
+        }
+        if(node->left) dfs(node->left,val,level+1,depth);
+        if(node->right) dfs(node->right,val,level+1,depth);
+    }
     TreeNode* addOneRow(TreeNode* root, int val, int depth) {
         if(depth==1){
             TreeNode* node = new TreeNode(val);
             node->left = root;
             return node;
         }
-        queue<pair<TreeNode*,int>> q;
-        q.push({root,1});
-        while(!q.empty()){
-            TreeNode* node = q.front().first;
-            int currDepth = q.front().second;
-            q.pop();
-            if(currDepth==depth) break;
-            if(currDepth==depth-1){
-                TreeNode* node1 = new TreeNode(val);
-                TreeNode* node2 = new TreeNode(val);
-                node1->left = node->left, node2->right = node->right;
-                node->left = node1, node->right = node2;
-            }
-            if(node->left) q.push({node->left,currDepth+1});
-            if(node->right) q.push({node->right,currDepth+1});
-        }
+        dfs(root,val,1,depth);
         return root;
     }
 };
