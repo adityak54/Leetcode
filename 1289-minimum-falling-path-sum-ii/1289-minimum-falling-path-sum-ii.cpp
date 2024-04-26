@@ -6,13 +6,14 @@ public:
         for(int j=0;j<n;j++) prev[j]=grid[0][j];
         for(int i=1;i<n;i++){
             for(int k=0; k<n; k++){
+                int ans = INT_MAX;
                 for(int j=0;j<n;j++){
                     if(j==k) continue;
-                    curr[k] = min(curr[k],grid[i][k]+prev[j]);
+                    ans = min(ans,grid[i][k]+prev[j]);
                 } 
+                curr[k] = ans;
             }
             prev = curr;
-            for(int j=0;j<n;j++) curr[j]=INT_MAX;
         }
         int ans = INT_MAX;
         for(int i=0;i<n;i++) ans=min(ans,prev[i]);
