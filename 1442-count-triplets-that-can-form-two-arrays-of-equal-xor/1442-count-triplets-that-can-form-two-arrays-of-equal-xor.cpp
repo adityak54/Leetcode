@@ -1,14 +1,13 @@
 class Solution {
 public:
     int countTriplets(vector<int>& arr) {
-        int n = arr.size();
-        int ans = 0;
+        int n = arr.size(), ans = 0;
+        unordered_map<int,int> countXor={{0,1}}, total;
+        int currXor = 0;
         for(int i=0; i<n; i++){
-            int currXor = arr[i];
-            for(int j=i+1; j<n; j++){
-                currXor ^= arr[j];
-                if(currXor==0) ans+=j-i;
-            }
+            currXor ^= arr[i];
+            ans+=countXor[currXor]*i-total[currXor];
+            countXor[currXor]++, total[currXor]+=i+1;
         }
         return ans;
     }
