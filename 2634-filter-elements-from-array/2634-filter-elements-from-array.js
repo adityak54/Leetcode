@@ -5,8 +5,10 @@
  */
 var filter = function(arr, fn) {
     const filteredArr = [];
-    for(var i=0; i<arr.length; i++){
-        if(fn(arr[i],i)) filteredArr.push(arr[i]);
-    }
+    var index = 0;
+    arr.filter((ele)=>{
+        if(fn(ele,index)) filteredArr.push(ele);
+        index++;
+    })
     return filteredArr;
 };
