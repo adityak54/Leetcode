@@ -13,11 +13,7 @@ public:
             }
         }
         for(int i=0;i<26;i++){
-            while(presentInAll[i]--){
-                string temp = "";
-                temp.push_back(char('a'+i));
-                ans.push_back(temp);
-            }
+            while(presentInAll[i]--) ans.push_back(string(1,'a'+i));
         }
         return ans;
     }
