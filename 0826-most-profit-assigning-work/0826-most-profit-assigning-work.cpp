@@ -10,14 +10,13 @@ public:
             diffprof.push_back({difficulty[i],profit[i]});
         }
         sort(diffprof.begin(), diffprof.end());
-        int j=0;
-        priority_queue<int> pq;
+        int j=0,currMax = 0;
         for(int i=0; i<n; i++){
             while(j<n && diffprof[j].first<=worker[i]){
-                pq.push(diffprof[j].second);
+                currMax = max(currMax, diffprof[j].second);
                 j++;
             }
-            if(!pq.empty()) ans += pq.top();
+            ans += currMax;
         }
         return ans;
     }
