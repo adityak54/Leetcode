@@ -6,6 +6,10 @@ class Solution {
         for(int j=0; j<4; j++){
             if(sideLength[j]+matchsticks[i]>mx) continue;
             int k=j-1;
+            /*When trying to place the third matchstick (2), suppose the side lengths are currently [2, 0, 0, 0]. 
+            With this optimization:
+The algorithm sees that placing 2 on the third side would create a configuration where side lengths [2, 0, 2, 0] are essentially the same as [2, 2, 0, 0] (just rotated).
+            */
             for(; k>=0; k--) if(sideLength[k]==sideLength[j]) break;
             if(k!=-1) continue;
             sideLength[j] += matchsticks[i];
